@@ -1,13 +1,25 @@
-name,country,year,duration_(min),genre/0,genre/1,director/name,director/surname,MPA_rating,budget_($),gross_($),rating_(IMDb),actors/0/name,actors/0/surname,actors/1/name,actors/1/surname
-Dune,United States,2021,155,Action,Adventure,Denis,Villeneuve,PG-13,165000000,223211174,8.3,Timothee,Chalamet,Rebecca,Ferguson
-Pulp Fiction,United States,2021,154,Crime,Drama,Quentin,Tarantino,R,8000000,213928762,8.9,John,Travolta,Uma,Thurman
-The Shining,United States,1980,146,Drama,Horror,Stanley,Kubrick,R,19000000,46998772,8.4,Jack,Nicholson,Shelley,Duvall
-The Dark Knight,United States,2008,152,Action,Crime,Jonathan,Nolan,PG-13,185000000,1005973645,9.0,Christian,Bale,Heath,Ledger
-Monty Python and the Holy Grail,United Kingdom,1975,91,Adventure,Comedy,Terry,Gilliam,PG,315780,1940906,8.2,Graham,Chapman,John,Cleese
-Monty Python's Life of Brian,United Kingdom,1979,94,Comedy,Satire,Terry,Jones,R,4000000,20742852,8.1,Graham,Chapman,John,Cleese
-Parasite,South Korea,2019,132,Comedy,Drama,Bong,Joon-ho,R,11400000,258668626,8.6,Kang-ho,Sung,Sun-kyun,Lee
-The Sixth Sense,United States,1999,107,Drama,Mystery,M. Night,Shyamalan,PG-13,40000000,672806432,8.1,Bruce,Willis,Haley Joel,Osment
-The Truman Show,United States,1998,103,Comedy,Drama,Peter,Weir,PG,60000000,264118201,8.1,Jim,Carrey,Ed,Harris
-Trainspotting,United Kingdom,1996,93,Drama,Comedy,Danny,Boyle,R,2062320,16771303,8.1,Ewan,McGregor,Ewen,Bremner
-A Clockwork Orange,United Kingdom,1971,136,Crime,Drama,Stanley,Kubrick,R,2200000,26904636,8.3,Malcolm,McDowell,Patrick,Magee
-Scary Movie,United States,2000,88,Comedy,Horror,Keenen Ivory,Wayans,R,19000000,278019771,6.2,Anna,Faris,Jon,Abrahams
+name,country,year,duration_min,genre1,genre2,directorname,directorsurname,budget_$,gross_$,mparating,ratingimdb,actorname,actorsurname
+Dune,United States,2021,155,Action,Adventure,Denis,Villeneuve,165000000,223211174,PG-13,8.3,Timothee,Chalamet
+Dune,United States,2021,155,Action,Adventure,Denis,Villeneuve,165000000,223211174,PG-13,8.3,Rebecca,Ferguson
+Pulp Fiction,United States,2021,154,Crime,Drama,Quentin,Tarantino,8000000,213928762,R,8.9,John,Travolta
+Pulp Fiction,United States,2021,154,Crime,Drama,Quentin,Tarantino,8000000,213928762,R,8.9,Uma,Thurman
+The Shining,United States,1980,146,Drama,Horror,Stanley,Kubrick,19000000,46998772,R,8.4,Jack,Nicholson
+The Shining,United States,1980,146,Drama,Horror,Stanley,Kubrick,19000000,46998772,R,8.4,Shelley,Duvall
+The Dark Knight,United States,2008,152,Action,Crime,Jonathan,Nolan,185000000,1005973645,PG-13,9.0,Christian,Bale
+The Dark Knight,United States,2008,152,Action,Crime,Jonathan,Nolan,185000000,1005973645,PG-13,9.0,Heath,Ledger
+Monty Python and the Holy Grail,United Kingdom,1975,91,Adventure,Comedy,Terry,Gilliam,315780,1940906,PG,8.2,Graham,Chapman
+Monty Python's Life of Brian,United Kingdom,1979,94,Comedy,Satire,Terry,Jones,4000000,20742852,R,8.1,Graham,Chapman
+Monty Python and the Holy Grail,United Kingdom,1975,91,Adventure,Comedy,Terry,Gilliam,315780,1940906,PG,8.2,John,Cleese
+Monty Python's Life of Brian,United Kingdom,1979,94,Comedy,Satire,Terry,Jones,4000000,20742852,R,8.1,John,Cleese
+Parasite,South Korea,2019,132,Comedy,Drama,Bong,Joon-ho,11400000,258668626,R,8.6,Kang-ho,Sung
+Parasite,South Korea,2019,132,Comedy,Drama,Bong,Joon-ho,11400000,258668626,R,8.6,Sun-kyun,Lee
+The Sixth Sense,United States,1999,107,Drama,Mystery,M. Night,Shyamalan,40000000,672806432,PG-13,8.1,Bruce,Willis
+The Sixth Sense,United States,1999,107,Drama,Mystery,M. Night,Shyamalan,40000000,672806432,PG-13,8.1,Haley Joel,Osment
+The Truman Show,United States,1998,103,Comedy,Drama,Peter,Weir,60000000,264118201,PG,8.1,Jim,Carrey
+The Truman Show,United States,1998,103,Comedy,Drama,Peter,Weir,60000000,264118201,PG,8.1,Ed,Harris
+Trainspotting,United Kingdom,1996,93,Drama,Comedy,Danny,Boyle,2062320,16771303,R,8.1,Ewan,McGregor
+Trainspotting,United Kingdom,1996,93,Drama,Comedy,Danny,Boyle,2062320,16771303,R,8.1,Ewen,Bremner
+A Clockwork Orange,United Kingdom,1971,136,Crime,Drama,Stanley,Kubrick,2200000,26904636,R,8.3,Malcolm,McDowell
+A Clockwork Orange,United Kingdom,1971,136,Crime,Drama,Stanley,Kubrick,2200000,26904636,R,8.3,Patrick,Magee
+Scary Movie,United States,2000,88,Comedy,Horror,Keenen Ivory,Wayans,19000000,278019771,R,6.2,Anna,Faris
+Scary Movie,United States,2000,88,Comedy,Horror,Keenen Ivory,Wayans,19000000,278019771,R,6.2,Jon,Abrahams

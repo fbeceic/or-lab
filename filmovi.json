@@ -2,336 +2,312 @@
    {
       "name":"Dune",
       "country":"United States",
-      "year":"2021",
-      "duration_(min)":"155",
-      "genre":[
-         "Action",
-         "Adventure"
-      ],
+      "year":2021,
+      "duration_min":155,
+      "genre1":"Action",
+      "genre2":"Adventure",
       "director":{
-         "name":"Denis",
-         "surname":"Villeneuve"
+         "directorname":"Denis",
+         "directorsurname":"Villeneuve"
       },
-      "MPA_rating":"PG-13",
-      "budget_($)":"165000000",
-      "gross_($)":"223211174",
-      "rating_(IMDb)":"8.3",
+      "budget_$":165000000,
+      "gross_$":223211174,
+      "mparating":"PG-13",
+      "ratingimdb":8.3,
       "actors":[
          {
-            "name":"Timothee",
-            "surname":"Chalamet"
+            "actorname":"Timothee",
+            "actorsurname":"Chalamet"
          },
          {
-            "name":"Rebecca",
-            "surname":"Ferguson"
+            "actorname":"Rebecca",
+            "actorsurname":"Ferguson"
          }
       ]
    },
    {
       "name":"Pulp Fiction",
       "country":"United States",
-      "year":"2021",
-      "duration_(min)":"154",
-      "genre":[
-         "Crime",
-         "Drama"
-      ],
+      "year":2021,
+      "duration_min":154,
+      "genre1":"Crime",
+      "genre2":"Drama",
       "director":{
-         "name":"Quentin",
-         "surname":"Tarantino"
+         "directorname":"Quentin",
+         "directorsurname":"Tarantino"
       },
-      "MPA_rating":"R",
-      "budget_($)":"8000000",
-      "gross_($)":"213928762",
-      "rating_(IMDb)":"8.9",
+      "budget_$":8000000,
+      "gross_$":213928762,
+      "mparating":"R",
+      "ratingimdb":8.9,
       "actors":[
          {
-            "name":"John",
-            "surname":"Travolta"
+            "actorname":"John",
+            "actorsurname":"Travolta"
          },
          {
-            "name":"Uma",
-            "surname":"Thurman"
+            "actorname":"Uma",
+            "actorsurname":"Thurman"
          }
       ]
    },
    {
       "name":"The Shining",
       "country":"United States",
-      "year":"1980",
-      "duration_(min)":"146",
-      "genre":[
-         "Drama",
-         "Horror"
-      ],
+      "year":1980,
+      "duration_min":146,
+      "genre1":"Drama",
+      "genre2":"Horror",
       "director":{
-         "name":"Stanley",
-         "surname":"Kubrick"
+         "directorname":"Stanley",
+         "directorsurname":"Kubrick"
       },
-      "MPA_rating":"R",
-      "budget_($)":"19000000",
-      "gross_($)":"46998772",
-      "rating_(IMDb)":"8.4",
+      "budget_$":19000000,
+      "gross_$":46998772,
+      "mparating":"R",
+      "ratingimdb":8.4,
       "actors":[
          {
-            "name":"Jack",
-            "surname":"Nicholson"
+            "actorname":"Jack",
+            "actorsurname":"Nicholson"
          },
          {
-            "name":"Shelley",
-            "surname":"Duvall"
+            "actorname":"Shelley",
+            "actorsurname":"Duvall"
          }
       ]
    },
    {
       "name":"The Dark Knight",
       "country":"United States",
-      "year":"2008",
-      "duration_(min)":"152",
-      "genre":[
-         "Action",
-         "Crime"
-      ],
+      "year":2008,
+      "duration_min":152,
+      "genre1":"Action",
+      "genre2":"Crime",
       "director":{
-         "name":"Jonathan",
-         "surname":"Nolan"
+         "directorname":"Jonathan",
+         "directorsurname":"Nolan"
       },
-      "MPA_rating":"PG-13",
-      "budget_($)":"185000000",
-      "gross_($)":"1005973645",
-      "rating_(IMDb)":"9.0",
+      "budget_$":185000000,
+      "gross_$":1005973645,
+      "mparating":"PG-13",
+      "ratingimdb":9.0,
       "actors":[
          {
-            "name":"Christian",
-            "surname":"Bale"
+            "actorname":"Christian",
+            "actorsurname":"Bale"
          },
          {
-            "name":"Heath",
-            "surname":"Ledger"
+            "actorname":"Heath",
+            "actorsurname":"Ledger"
          }
       ]
    },
    {
       "name":"Monty Python and the Holy Grail",
       "country":"United Kingdom",
-      "year":"1975",
-      "duration_(min)":"91",
-      "genre":[
-         "Adventure",
-         "Comedy"
-      ],
+      "year":1975,
+      "duration_min":91,
+      "genre1":"Adventure",
+      "genre2":"Comedy",
       "director":{
-         "name":"Terry",
-         "surname":"Gilliam"
+         "directorname":"Terry",
+         "directorsurname":"Gilliam"
       },
-      "MPA_rating":"PG",
-      "budget_($)":"315780",
-      "gross_($)":"1940906",
-      "rating_(IMDb)":"8.2",
+      "budget_$":315780,
+      "gross_$":1940906,
+      "mparating":"PG",
+      "ratingimdb":8.2,
       "actors":[
          {
-            "name":"Graham",
-            "surname":"Chapman"
+            "actorname":"Graham",
+            "actorsurname":"Chapman"
          },
          {
-            "name":"John",
-            "surname":"Cleese"
+            "actorname":"John",
+            "actorsurname":"Cleese"
          }
       ]
    },
    {
       "name":"Monty Python's Life of Brian",
       "country":"United Kingdom",
-      "year":"1979",
-      "duration_(min)":"94",
-      "genre":[
-         "Comedy",
-         "Satire"
-      ],
+      "year":1979,
+      "duration_min":94,
+      "genre1":"Comedy",
+      "genre2":"Satire",
       "director":{
-         "name":"Terry",
-         "surname":"Jones"
+         "directorname":"Terry",
+         "directorsurname":"Jones"
       },
-      "MPA_rating":"R",
-      "budget_($)":"4000000",
-      "gross_($)":"20742852",
-      "rating_(IMDb)":"8.1",
+      "budget_$":4000000,
+      "gross_$":20742852,
+      "mparating":"R",
+      "ratingimdb":8.1,
       "actors":[
          {
-            "name":"Graham",
-            "surname":"Chapman"
+            "actorname":"Graham",
+            "actorsurname":"Chapman"
          },
          {
-            "name":"John",
-            "surname":"Cleese"
+            "actorname":"John",
+            "actorsurname":"Cleese"
          }
       ]
    },
    {
       "name":"Parasite",
       "country":"South Korea",
-      "year":"2019",
-      "duration_(min)":"132",
-      "genre":[
-         "Comedy",
-         "Drama"
-      ],
+      "year":2019,
+      "duration_min":132,
+      "genre1":"Comedy",
+      "genre2":"Drama",
       "director":{
-         "name":"Bong",
-         "surname":"Joon-ho"
+         "directorname":"Bong",
+         "directorsurname":"Joon-ho"
       },
-      "MPA_rating":"R",
-      "budget_($)":"11400000",
-      "gross_($)":"258668626",
-      "rating_(IMDb)":"8.6",
+      "budget_$":11400000,
+      "gross_$":258668626,
+      "mparating":"R",
+      "ratingimdb":8.6,
       "actors":[
          {
-            "name":"Kang-ho",
-            "surname":"Sung"
+            "actorname":"Kang-ho",
+            "actorsurname":"Sung"
          },
          {
-            "name":"Sun-kyun",
-            "surname":"Lee"
+            "actorname":"Sun-kyun",
+            "actorsurname":"Lee"
          }
       ]
    },
    {
       "name":"The Sixth Sense",
       "country":"United States",
-      "year":"1999",
-      "duration_(min)":"107",
-      "genre":[
-         "Drama",
-         "Mystery"
-      ],
+      "year":1999,
+      "duration_min":107,
+      "genre1":"Drama",
+      "genre2":"Mystery",
       "director":{
-         "name":"M. Night",
-         "surname":"Shyamalan"
+         "directorname":"M. Night",
+         "directorsurname":"Shyamalan"
       },
-      "MPA_rating":"PG-13",
-      "budget_($)":"40000000",
-      "gross_($)":"672806432",
-      "rating_(IMDb)":"8.1",
+      "budget_$":40000000,
+      "gross_$":672806432,
+      "mparating":"PG-13",
+      "ratingimdb":8.1,
       "actors":[
          {
-            "name":"Bruce",
-            "surname":"Willis"
+            "actorname":"Bruce",
+            "actorsurname":"Willis"
          },
          {
-            "name":"Haley Joel",
-            "surname":"Osment"
+            "actorname":"Haley Joel",
+            "actorsurname":"Osment"
          }
       ]
    },
    {
       "name":"The Truman Show",
       "country":"United States",
-      "year":"1998",
-      "duration_(min)":"103",
-      "genre":[
-         "Comedy",
-         "Drama"
-      ],
+      "year":1998,
+      "duration_min":103,
+      "genre1":"Comedy",
+      "genre2":"Drama",
       "director":{
-         "name":"Peter",
-         "surname":"Weir"
+         "directorname":"Peter",
+         "directorsurname":"Weir"
       },
-      "MPA_rating":"PG",
-      "budget_($)":"60000000",
-      "gross_($)":"264118201",
-      "rating_(IMDb)":"8.1",
+      "budget_$":60000000,
+      "gross_$":264118201,
+      "mparating":"PG",
+      "ratingimdb":8.1,
       "actors":[
          {
-            "name":"Jim",
-            "surname":"Carrey"
+            "actorname":"Jim",
+            "actorsurname":"Carrey"
          },
          {
-            "name":"Ed",
-            "surname":"Harris"
+            "actorname":"Ed",
+            "actorsurname":"Harris"
          }
       ]
    },
    {
       "name":"Trainspotting",
       "country":"United Kingdom",
-      "year":"1996",
-      "duration_(min)":"93",
-      "genre":[
-         "Drama",
-         "Comedy"
-      ],
+      "year":1996,
+      "duration_min":93,
+      "genre1":"Drama",
+      "genre2":"Comedy",
       "director":{
-         "name":"Danny",
-         "surname":"Boyle"
+         "directorname":"Danny",
+         "directorsurname":"Boyle"
       },
-      "MPA_rating":"R",
-      "budget_($)":"2062320",
-      "gross_($)":"16771303",
-      "rating_(IMDb)":"8.1",
+      "budget_$":2062320,
+      "gross_$":16771303,
+      "mparating":"R",
+      "ratingimdb":8.1,
       "actors":[
          {
-            "name":"Ewan",
-            "surname":"McGregor"
+            "actorname":"Ewan",
+            "actorsurname":"McGregor"
          },
          {
-            "name":"Ewen",
-            "surname":"Bremner"
+            "actorname":"Ewen",
+            "actorsurname":"Bremner"
          }
       ]
    },
    {
       "name":"A Clockwork Orange",
       "country":"United Kingdom",
-      "year":"1971",
-      "duration_(min)":"136",
-      "genre":[
-         "Crime",
-         "Drama"
-      ],
+      "year":1971,
+      "duration_min":136,
+      "genre1":"Crime",
+      "genre2":"Drama",
       "director":{
-         "name":"Stanley",
-         "surname":"Kubrick"
+         "directorname":"Stanley",
+         "directorsurname":"Kubrick"
       },
-      "MPA_rating":"R",
-      "budget_($)":"2200000",
-      "gross_($)":"26904636",
-      "rating_(IMDb)":"8.3",
+      "budget_$":2200000,
+      "gross_$":26904636,
+      "mparating":"R",
+      "ratingimdb":8.3,
       "actors":[
          {
-            "name":"Malcolm",
-            "surname":"McDowell"
+            "actorname":"Malcolm",
+            "actorsurname":"McDowell"
          },
          {
-            "name":"Patrick",
-            "surname":"Magee"
+            "actorname":"Patrick",
+            "actorsurname":"Magee"
          }
       ]
    },
    {
       "name":"Scary Movie",
       "country":"United States",
-      "year":"2000",
-      "duration_(min)":"88",
-      "genre":[
-         "Comedy",
-         "Horror"
-      ],
+      "year":2000,
+      "duration_min":88,
+      "genre1":"Comedy",
+      "genre2":"Horror",
       "director":{
-         "name":"Keenen Ivory",
-         "surname":"Wayans"
+         "directorname":"Keenen Ivory",
+         "directorsurname":"Wayans"
       },
-      "MPA_rating":"R",
-      "budget_($)":"19000000",
-      "gross_($)":"278019771",
-      "rating_(IMDb)":"6.2",
+      "budget_$":19000000,
+      "gross_$":278019771,
+      "mparating":"R",
+      "ratingimdb":6.2,
       "actors":[
          {
-            "name":"Anna",
-            "surname":"Faris"
+            "actorname":"Anna",
+            "actorsurname":"Faris"
          },
          {
-            "name":"Jon",
-            "surname":"Abrahams"
+            "actorname":"Jon",
+            "actorsurname":"Abrahams"
          }
       ]
    }
