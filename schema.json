@@ -1,0 +1,258 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "Movie",
+    "description": "A list of movies with many attributes.",
+    "default": {},
+    "examples": [
+        {
+            "name": "Dune",
+            "country": "United States",
+            "year": 2021,
+            "duration_min": 155,
+            "genre1": "Action",
+            "genre2": "Adventure",
+            "director": {
+                "directorname": "Denis",
+                "directorsurname": "Villeneuve"
+            },
+            "budget_$": 165000000,
+            "gross_$": 223211174,
+            "mparating": "PG-13",
+            "ratingimdb": 8.3,
+            "actors": [
+                {
+                    "actorname": "Timothee",
+                    "actorsurname": "Chalamet"
+                },
+                {
+                    "actorname": "Rebecca",
+                    "actorsurname": "Ferguson"
+                }
+            ]
+        }
+    ],
+    "required": [
+        "name",
+        "country",
+        "year",
+        "duration_min",
+        "genre1",
+        "genre2",
+        "director",
+        "budget_$",
+        "gross_$",
+        "mparating",
+        "ratingimdb",
+        "actors"
+    ],
+    "properties": {
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "Name",
+            "description": "Describes the name of the movie.",
+            "default": "",
+            "examples": [
+                "Dune"
+            ]
+        },
+        "country": {
+            "$id": "#/properties/country",
+            "type": "string",
+            "title": "Country",
+            "description": "Describes the movie's country of origin.",
+            "default": "",
+            "examples": [
+                "United States"
+            ]
+        },
+        "year": {
+            "$id": "#/properties/year",
+            "type": "integer",
+            "title": "Year",
+            "description": "Describes the year the movie came out.",
+            "default": 0,
+            "examples": [
+                2021
+            ]
+        },
+        "duration_min": {
+            "$id": "#/properties/duration_min",
+            "type": "integer",
+            "title": "Duration (in minutes)",
+            "description": "Describes the duration of the movie.",
+            "default": 0,
+            "examples": [
+                155
+            ]
+        },
+        "genre1": {
+            "$id": "#/properties/genre1",
+            "type": "string",
+            "title": "First genre",
+            "description": "Describes the first genre of the movie.",
+            "default": "",
+            "examples": [
+                "Action"
+            ]
+        },
+        "genre2": {
+            "$id": "#/properties/genre2",
+            "type": "string",
+            "title": "Second genre",
+            "description": "Describes the second genre of the movie.",
+            "default": "",
+            "examples": [
+                "Adventure"
+            ]
+        },
+        "director": {
+            "$id": "#/properties/director",
+            "type": "object",
+            "title": "Director",
+            "description": "Describes the director of the movie.",
+            "default": {},
+            "examples": [
+                {
+                    "directorname": "Denis",
+                    "directorsurname": "Villeneuve"
+                }
+            ],
+            "required": [
+                "directorname",
+                "directorsurname"
+            ],
+            "properties": {
+                "directorname": {
+                    "$id": "#/properties/director/properties/directorname",
+                    "type": "string",
+                    "title": "Director name",
+                    "description": "Describes the director's name.",
+                    "default": "",
+                    "examples": [
+                        "Denis"
+                    ]
+                },
+                "directorsurname": {
+                    "$id": "#/properties/director/properties/directorsurname",
+                    "type": "string",
+                    "title": "Director surname",
+                    "description": "Describes the director's surname.",
+                    "default": "",
+                    "examples": [
+                        "Villeneuve"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "budget_$": {
+            "$id": "#/properties/budget_%24",
+            "type": "integer",
+            "title": "Budget (in dollars)",
+            "description": "Describes the budget ($) of the movie.",
+            "default": 0,
+            "examples": [
+                165000000
+            ]
+        },
+        "gross_$": {
+            "$id": "#/properties/gross_%24",
+            "type": "integer",
+            "title": "Gross (in dollars)",
+            "description": "Describes the worldwide gross ($) of the movie.",
+            "default": 0,
+            "examples": [
+                223211174
+            ]
+        },
+        "mparating": {
+            "$id": "#/properties/mparating",
+            "type": "string",
+            "title": "MPA rating",
+            "description": "Describes the MPA rating of the movie.",
+            "default": "",
+            "examples": [
+                "PG-13"
+            ]
+        },
+        "ratingimdb": {
+            "$id": "#/properties/ratingimdb",
+            "type": "number",
+            "title": "IMDb rating",
+            "description": "Describes the IMDb rating of the movie.",
+            "default": 0.0,
+            "examples": [
+                8.3
+            ]
+        },
+        "actors": {
+            "$id": "#/properties/actors",
+            "type": "array",
+            "title": "Actors",
+            "description": "An array of actors starring in the movie.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "actorname": "Timothee",
+                        "actorsurname": "Chalamet"
+                    },
+                    {
+                        "actorname": "Rebecca",
+                        "actorsurname": "Ferguson"
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/actors/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/actors/items/anyOf/0",
+                        "type": "object",
+                        "title": "Actor",
+                        "description": "Describes the actor starring in the movie.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "actorname": "Timothee",
+                                "actorsurname": "Chalamet"
+                            }
+                        ],
+                        "required": [
+                            "actorname",
+                            "actorsurname"
+                        ],
+                        "properties": {
+                            "actorname": {
+                                "$id": "#/properties/actors/items/anyOf/0/properties/actorname",
+                                "type": "string",
+                                "title": "Actor name",
+                                "description": "Describes the actor's name.",
+                                "default": "",
+                                "examples": [
+                                    "Timothee"
+                                ]
+                            },
+                            "actorsurname": {
+                                "$id": "#/properties/actors/items/anyOf/0/properties/actorsurname",
+                                "type": "string",
+                                "title": "Actor surname",
+                                "description": "Describes the actor's surname.",
+                                "default": "",
+                                "examples": [
+                                    "Chalamet"
+                                ]
+                            }
+                        },
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        }
+    },
+    "additionalProperties": true
+}
