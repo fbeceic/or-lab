@@ -6,6 +6,7 @@ import com.movies.moviesapp.service.ActorQueryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ActorQueryServiceImpl implements ActorQueryService {
@@ -18,8 +19,18 @@ public class ActorQueryServiceImpl implements ActorQueryService {
 
 
     @Override
+    public Optional<Actor> findById(Long id) {
+        return actorRepository.findById(id);
+    }
+
+    @Override
     public List<Actor> findAll() {
         return actorRepository.findAll();
+    }
+
+    @Override
+    public List<Actor> findByNameContaining(String name) {
+        return actorRepository.findByNameContaining(name);
     }
 
 }

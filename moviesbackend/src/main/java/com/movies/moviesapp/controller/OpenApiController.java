@@ -28,16 +28,11 @@ public class OpenApiController {
      */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Resource loadEmployeesWithResourceLoader() throws IOException {
+    public Resource loadOpenApi() {
 
-        String openApi = resourceService.readDataResourceAsString();
-        Resource openApi2 = resourceService.readDataResource();
+        Resource openApi = resourceService.readDataResource();
 
-
-        BasicJsonParser parser = new BasicJsonParser();
-        JSONParser jsonObject = new JSONParser(openApi);
-
-        return openApi2;
+        return openApi;
     }
 
 }

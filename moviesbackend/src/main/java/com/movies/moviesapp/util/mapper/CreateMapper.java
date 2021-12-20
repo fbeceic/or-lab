@@ -9,7 +9,7 @@ public interface CreateMapper<T, U> {
     U map(T from);
 
     default List<U> mapToList(Collection<T> from) {
-        return (List)from.stream().map(this::map).collect(Collectors.toList());
+        return (List<U>)from.stream().map(this::map).collect(Collectors.toList());
     }
 
 }

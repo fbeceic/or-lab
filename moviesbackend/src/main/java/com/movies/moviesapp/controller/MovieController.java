@@ -1,17 +1,26 @@
 package com.movies.moviesapp.controller;
 
 
+import com.movies.moviesapp.controller.response.MovieResponse;
+import com.movies.moviesapp.controller.response.WrappedMovieListResponse;
+import com.movies.moviesapp.controller.response.WrappedMovieResponse;
 import com.movies.moviesapp.entity.Actor;
+import com.movies.moviesapp.entity.Director;
 import com.movies.moviesapp.entity.Movie;
+import com.movies.moviesapp.exception.ApiRequestException;
 import com.movies.moviesapp.repository.ActorRepository;
+import com.movies.moviesapp.repository.DirectorRepository;
 import com.movies.moviesapp.repository.MovieRepository;
+import com.movies.moviesapp.util.mapper.CreateMapper;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,10 +32,146 @@ public class MovieController {
 
     private final ActorRepository actorRepository;
 
-    public MovieController(MovieRepository movieRepository, ActorRepository actorRepository) {
+    private final DirectorRepository directorRepository;
+
+
+    private final CreateMapper<Movie, MovieResponse> movieMovieResponseCreateMapper;
+
+    public MovieController(MovieRepository movieRepository, ActorRepository actorRepository, DirectorRepository directorRepository, CreateMapper<Movie, MovieResponse> movieMovieResponseCreateMapper) {
         this.movieRepository = movieRepository;
         this.actorRepository = actorRepository;
+        this.directorRepository = directorRepository;
+        this.movieMovieResponseCreateMapper = movieMovieResponseCreateMapper;
     }
+
+    //LAB3:
+    /**
+     * Returns all movies wrapped.
+     *
+     * @return List of all movies wrapped
+     */
+    @GetMapping ("/wrapped")//localhost:9090/movies
+    @ResponseStatus(HttpStatus.OK)
+    public WrappedMovieListResponse findAllWrapped() {
+
+        List<Movie> movies = movieRepository.findAll();
+
+        if (!movies.isEmpty()) {
+            return new WrappedMovieListResponse("OK","Fetched all movies", movies);
+        } else {
+            throw new ApiRequestException("MOVIES");
+        }
+    }
+
+    @PutMapping("/wrapped")
+    @ResponseStatus(HttpStatus.OK)
+    public void notSupported() {
+            throw new ApiRequestException("MOVIES_PUT");
+    }
+
+    @PatchMapping("/wrapped")
+    @ResponseStatus(HttpStatus.OK)
+    public void notImplemented() {
+        throw new ApiRequestException("MOVIES_PUT");
+    }
+
+    /**
+     * Returns all movies containing gross search term.
+     *
+     * @param imdbRating Request describing the worldwide gross of the movie
+     * @return List of movies containing search term
+     */
+    @GetMapping("/wrapped/imdb/{imdbRating}") //localhost:9090/movies
+    @ResponseStatus(HttpStatus.CREATED)
+    public WrappedMovieListResponse findByIMDbRatingWrapped(@PathVariable String imdbRating) {
+
+        List<Movie> movies = movieRepository.findByRating(Double.valueOf(imdbRating));
+
+        if (!movies.isEmpty()) {
+            return new WrappedMovieListResponse("OK","Fetched all movies with the desired IMDb rating", movies);
+        } else {
+            throw new ApiRequestException("IMDB");
+        }
+    }
+
+    /**
+     * Add a new movie
+     *
+     * @param movie Request describing new movie to be created
+     * @return List of added movie wrapped
+     */
+    @PostMapping ("/wrapped")//localhost:9090/movies
+    @ResponseStatus(HttpStatus.CREATED)
+    public WrappedMovieResponse addMovie(@RequestBody Movie movie) {
+
+        directorRepository.save(movie.getDirector());
+        actorRepository.saveAll(movie.getActors());
+
+        final Movie createdMovie = movieRepository.save(movie);
+
+        return new WrappedMovieResponse("OK","Successfully added a new movie", createdMovie);
+
+    }
+
+    /**
+     * Edit an existing movie
+     *
+     * @param newMovie Request describing modified movie
+     * @param id Request describing the movie to be modified
+     * @return List of modified movie wrapped
+     */
+    @PutMapping ("/wrapped/{id}")//localhost:9090/movies
+    @ResponseStatus(HttpStatus.CREATED)
+    public WrappedMovieResponse editMovie(@RequestBody Movie newMovie, @PathVariable Long id) {
+
+        Optional<Movie> foundMovie = movieRepository.findById(id);
+
+        if(foundMovie.isPresent()) {
+            foundMovie
+                    .map(movie -> {
+                        movie.setName(newMovie.getName());
+                        movie.setCountry(newMovie.getCountry());
+                        movie.setYear(newMovie.getYear());
+                        movie.setDuration(newMovie.getDuration());
+                        movie.setGenre1(newMovie.getGenre1());
+                        movie.setGenre2(newMovie.getGenre2());
+                        movie.setDirector(newMovie.getDirector());
+                        movie.setActors(newMovie.getActors());
+                        movie.setMparating(newMovie.getMparating());
+                        movie.setBudget(newMovie.getBudget());
+                        movie.setGross(newMovie.getGross());
+                        movie.setRating(newMovie.getRating());
+                        return movieRepository.save(movie);
+                    });
+            return new WrappedMovieResponse("OK","Successfully modified a movie", newMovie);
+        } else {
+            throw new ApiRequestException("EDIT_MOVIE");
+        }
+    }
+
+    /**
+     * Delete an existing movie
+     *
+     * @param id Request describing a movie to be deleted
+     * @return Status of deletion
+     */
+    @DeleteMapping ("/wrapped/{id}")//localhost:9090/movies
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public String deleteMovie(@PathVariable Long id) {
+
+        Optional<Movie> foundMovie = movieRepository.findById(id);
+
+        if(foundMovie.isPresent()) {
+            movieRepository.delete(foundMovie.get());
+            return "Successfully deleted the movie with the desired ID";
+
+        } else {
+            throw new ApiRequestException("EDIT_MOVIE");
+        }
+    }
+
+    ////////////////////////////
+
 
     /**
      * Returns all movies.
@@ -37,7 +182,9 @@ public class MovieController {
     @ResponseStatus(HttpStatus.OK)
     public List<Movie> findAll() {
 
-        return movieRepository.findAll();
+        List<Movie> movies = movieRepository.findAll();
+
+        return movies;
     }
 
     /**
@@ -46,7 +193,7 @@ public class MovieController {
      * @param name Request describing movie name
      * @return List of movies containing search term
      */
-    @PostMapping("/name/{name}") //localhost:9090/movies
+    @GetMapping("/name/{name}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByName(@PathVariable String name) {
 
@@ -59,7 +206,7 @@ public class MovieController {
      * @param country Request describing movie country
      * @return List of movies containing search term
      */
-    @PostMapping("/country/{country}") //localhost:9090/movies
+    @GetMapping("/country/{country}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByCountry(@PathVariable String country) {
 
@@ -72,11 +219,24 @@ public class MovieController {
      * @param year Request describing the year a movie came out
      * @return List of movies containing search term
      */
-    @PostMapping("/year/{year}") //localhost:9090/movies
+    @GetMapping("/year/{year}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByYear(@PathVariable String year) {
 
         return movieRepository.findByYear(Integer.parseInt(year));
+    }
+
+    /**
+     * Returns all movies containing duration search term.
+     *
+     * @param duration Request describing the duration (in minutes) of a movie
+     * @return List of movies containing search term
+     */
+    @GetMapping("/duration/{duration}") //localhost:9090/movies
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Movie> findByDuration(@PathVariable String duration) {
+
+        return movieRepository.findByDuration(Integer.parseInt(duration));
     }
 
     /**
@@ -85,11 +245,17 @@ public class MovieController {
      * @param genre Request describing the genre of a movie
      * @return List of movies containing search term
      */
-    @PostMapping("/genre/{genre}") //localhost:9090/movies
+    @GetMapping("/genre/{genre}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByGenre(@PathVariable String genre) {
 
-        return movieRepository.findByGenre1OrGenre2Containing(genre,genre);
+        List<Movie> movies = movieRepository.findByGenre1OrGenre2Containing(genre, genre);
+
+        if (!movies.isEmpty()) {
+            return movies;
+        } else {
+            throw new ApiRequestException("GENRE");
+        }
     }
 
     /**
@@ -98,7 +264,7 @@ public class MovieController {
      * @param directorName Request describing the director of the movie
      * @return List of movies containing search term
      */
-    @PostMapping("/director/{directorName}") //localhost:9090/movies
+    @GetMapping("/director/{directorName}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByDirector(@PathVariable String directorName) {
 
@@ -112,7 +278,7 @@ public class MovieController {
      * @param actorName Request describing the actor of the movie
      * @return List of movies containing search term
      */
-    @PostMapping("/actor/{actorName}") //localhost:9090/movies
+    @GetMapping("/actor/{actorName}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByActor(@PathVariable String actorName) {
 
@@ -131,7 +297,7 @@ public class MovieController {
      * @param mpaRating Request describing the mpa rating of the movie
      * @return List of movies containing search term
      */
-    @PostMapping("/mparating/{mpaRating}") //localhost:9090/movies
+    @GetMapping("/mparating/{mpaRating}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByMpaRating(@PathVariable String mpaRating) {
 
@@ -145,7 +311,7 @@ public class MovieController {
      * @param budget Request describing the budget of the movie
      * @return List of movies containing search term
      */
-    @PostMapping("/budget/{budget}") //localhost:9090/movies
+    @GetMapping("/budget/{budget}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByBudget(@PathVariable String budget) {
 
@@ -159,10 +325,9 @@ public class MovieController {
      * @param gross Request describing the worldwide gross of the movie
      * @return List of movies containing search term
      */
-    @PostMapping("/gross/{gross}") //localhost:9090/movies
+    @GetMapping("/gross/{gross}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByGross(@PathVariable String gross) {
-
 
         return movieRepository.findByGross(Integer.valueOf(gross));
     }
@@ -173,21 +338,26 @@ public class MovieController {
      * @param imdbRating Request describing the worldwide gross of the movie
      * @return List of movies containing search term
      */
-    @PostMapping("/imdb/{imdbRating}") //localhost:9090/movies
+    @GetMapping("/imdb/{imdbRating}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Movie> findByIMDbRating(@PathVariable String imdbRating) {
+    public List<MovieResponse> findByIMDbRating(@PathVariable String imdbRating) {
 
+        List<Movie> movies = movieRepository.findByRating(Double.valueOf(imdbRating));
 
-        return movieRepository.findByRating(Double.valueOf(imdbRating));
+        if (!movies.isEmpty()) {
+            return movieMovieResponseCreateMapper.mapToList(movies);
+        } else {
+            throw new ApiRequestException("IMDB");
+        }
     }
-
+    
     /**
      * Returns all movies containing a wildcard search term.
      *
      * @param wildcard Request describing a wildcard search term of the movie
      * @return List of movies containing search term
      */
-    @PostMapping("/wildcard/{wildcard}") //localhost:9090/movies
+    @GetMapping("/wildcard/{wildcard}") //localhost:9090/movies
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> findByWildcard(@PathVariable String wildcard) {
 
@@ -214,16 +384,18 @@ public class MovieController {
         } catch (Exception ex) {
             System.out.println("Search term is not integer.");
         }
-        try {
-            var doubleVal = Double.valueOf(wildcard);
+        if (foundMoviesIntegers.isEmpty()) {
+            try {
+                var doubleVal = Double.valueOf(wildcard);
 
-            System.out.println(Double.valueOf(wildcard));
+                System.out.println(Double.valueOf(wildcard));
 
-            foundMoviesIntegers = Stream.of(movieRepository.findByRating(doubleVal))
-                    .flatMap(Collection::stream)
-                    .collect(Collectors.toList());
-        } catch (Exception ex) {
-            System.out.println("Search term is not double.");
+                foundMoviesIntegers = Stream.of(movieRepository.findByRating(doubleVal))
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList());
+            } catch (Exception ex) {
+                System.out.println("Search term is not double.");
+            }
         }
 
         if (foundMoviesIntegers.isEmpty()) {
@@ -231,7 +403,8 @@ public class MovieController {
                             movieRepository.findByCountryContaining(wildcard),
                             movieRepository.findByGenre1OrGenre2Containing(wildcard,wildcard),
                             movieRepository.findByDirector_NameOrDirector_Surname(wildcard,wildcard),
-                            movieRepository.findByActorsIn(foundActors))
+                            movieRepository.findByActorsIn(foundActors),
+                            movieRepository.findByMparatingContaining(wildcard))
                     .flatMap(Collection::stream)
                     .collect(Collectors.toList());
             return foundMovies;
