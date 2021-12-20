@@ -1,0 +1,448 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Kolekcija filmova - API",
+    "contact": {
+      "name": "Felix Bečeić",
+      "url": "https://www.facebook.com/fxbeceic",
+      "email": "felix.beceic@fer.hr"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/movies/wrapped": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Get the list of all movies in the collection",
+        "description": "Generates the list of all movies in the collection wrapped",
+        "operationId": "findAllWrapped",
+        "responses": {
+          "200": {
+            "description": "Fetched all movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Add a new movie to the collection",
+        "description": "Adds a new movie from the body of the POST request",
+        "operationId": "addMovie",
+        "requestBody": {
+          "description": "Movie object to be added to the collection",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully added a new movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Invalid input, correct the structure of the object",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "movie"
+      }
+    },
+    "/movies/wrapped/{id}": {
+      "put": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Edit the specified movie",
+        "description": "Edits a movie specified in the body of the request",
+        "operationId": "editMovie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie to edit",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Movie object with custom values",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully modified a movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The movie with the desired ID doesn't exist",
+            "content": {}
+          },
+          "500": {
+            "description": "Invalid input, correct the structure of the object",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "movie"
+      },
+      "delete": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Delete a movie",
+        "description": "Deletes a movie with the specified ID",
+        "operationId": "deleteMovie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the movie to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "1",
+            "content": {}
+          },
+          "404": {
+            "description": "The movie with the desired ID doesn't exist",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/movies/wrapped/imdb/{imdbrating}": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "summary": "Find a movie with the specified imdbrating",
+        "description": "Returns a single movie",
+        "operationId": "findByIMDbRatingWrapped",
+        "parameters": [
+          {
+            "name": "imdbrating",
+            "in": "path",
+            "description": "Rating of the movie to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetched all movies with the desired IMDb rating",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Movie with the provided IMDb rating doesn't exist",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/actors": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "summary": "Get the list of all actors in the collection",
+        "description": "Generates the list of all actors in the collection wrapped",
+        "operationId": "findAllActors",
+        "responses": {
+          "200": {
+            "description": "Fetched all actors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Actor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/actors/id/{id}": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "summary": "Get the actor by ID",
+        "description": "Retrieves an actor with the specified ID",
+        "operationId": "findById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the actor to display",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetched actor object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Actor"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Actor with the provided ID doesn't exist",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/actors/name/{name}": {
+      "get": {
+        "tags": [
+          "Actors"
+        ],
+        "summary": "Get the actor by first name",
+        "description": "Retrieves an actor with the first name containing the inputed string",
+        "operationId": "findByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the actor to display",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetched actor object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Actor"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Actor with the provided name doesn't exist",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/directors": {
+      "get": {
+        "tags": [
+          "Directors"
+        ],
+        "summary": "Get the list of all directors in the collection",
+        "description": "Generates the list of all directors in the collection wrapped",
+        "operationId": "findAllDirectors",
+        "responses": {
+          "200": {
+            "description": "Fetched all directors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Director"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/directors/id/{id}": {
+      "get": {
+        "tags": [
+          "Directors"
+        ],
+        "summary": "Get the director by ID",
+        "description": "Retrieves a director with the specified ID",
+        "operationId": "findActorsById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the director to display",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetched actor object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Director"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Actor with the provided ID doesn't exist",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer"
+          },
+          "duration_min": {
+            "type": "integer"
+          },
+          "genre1": {
+            "type": "string"
+          },
+          "genre2": {
+            "type": "string"
+          },
+          "director": {
+            "type": "object",
+            "properties": {}
+          },
+          "actors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "budget_$": {
+            "type": "integer"
+          },
+          "gross_$": {
+            "type": "integer"
+          },
+          "mparating": {
+            "type": "string"
+          },
+          "ratingimdb": {
+            "type": "number"
+          }
+        }
+      },
+      "Actor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          }
+        }
+      },
+      "Director": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
