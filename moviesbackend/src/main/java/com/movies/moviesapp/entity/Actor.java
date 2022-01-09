@@ -1,18 +1,24 @@
 package com.movies.moviesapp.entity;
 
+import ioinformarics.oss.jackson.module.jsonld.annotation.*;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "actor")
+@JsonldResource
+@JsonldType("http://schema.org/Person")
 public class Actor {
 
     @Id
     @Column(name = "id")
     private Long id;
 
+    @JsonldProperty("http://schema.org/name")
     @Column(name = "actorname")
     private String name;
 
+    @JsonldProperty("http://schema.org/surname")
     @Column(name = "actorsurname")
     private String surname;
 
@@ -39,4 +45,6 @@ public class Actor {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+
 }

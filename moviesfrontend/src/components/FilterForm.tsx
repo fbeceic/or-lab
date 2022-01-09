@@ -28,6 +28,7 @@ export default function FilterForm() {
             "Ime filma (name)",
             "Zemlja (country)",
             "Godina (year)",
+            "Trajanje (duration)",
             "Žanr (genre)",
             "Redatelj (director)",
             "Glumci (actors)",

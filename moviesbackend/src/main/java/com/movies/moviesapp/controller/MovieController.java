@@ -1,6 +1,9 @@
 package com.movies.moviesapp.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movies.moviesapp.controller.response.MovieResponse;
 import com.movies.moviesapp.controller.response.WrappedMovieListResponse;
 import com.movies.moviesapp.controller.response.WrappedMovieResponse;
@@ -12,6 +15,7 @@ import com.movies.moviesapp.repository.ActorRepository;
 import com.movies.moviesapp.repository.DirectorRepository;
 import com.movies.moviesapp.repository.MovieRepository;
 import com.movies.moviesapp.util.mapper.CreateMapper;
+import ioinformarics.oss.jackson.module.jsonld.JsonldModule;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
@@ -185,6 +189,35 @@ public class MovieController {
         List<Movie> movies = movieRepository.findAll();
 
         return movies;
+    }
+
+    /**
+     * Returns all movies containing id in JSON-LS format.
+     *
+     * @param id Request describing movie name
+     * @return List of movies containing search term
+     */
+    @GetMapping("/jsonld/id/{id}") //localhost:9090/movies
+    @ResponseStatus(HttpStatus.CREATED)
+    public JsonNode findByIdJsonLd(@PathVariable Long id) throws JsonProcessingException {
+
+        final Optional<Movie> movie = movieRepository.findById(id);
+
+        if (movie.isPresent()) {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JsonldModule());
+
+            String personJsonLd = objectMapper.writeValueAsString(movie.get());
+            JsonNode node = objectMapper.readTree(personJsonLd);
+
+            return node;
+
+
+        } else {
+
+            throw new ApiRequestException("DIRECTOR_ID");
+        }
     }
 
     /**

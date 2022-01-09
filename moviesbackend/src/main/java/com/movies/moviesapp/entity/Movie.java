@@ -1,5 +1,6 @@
 package com.movies.moviesapp.entity;
 
+import ioinformarics.oss.jackson.module.jsonld.annotation.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -7,40 +8,50 @@ import java.util.List;
 
 @Entity
 @Table(name = "movie")
+@JsonldResource
+@JsonldType("http://schema.org/Movie")
 public class Movie {
 
     @Id
     @Column(name = "id")
     private Long id;
 
+    @JsonldProperty("http://schema.org/name")
     @Column(name = "name")
     private String name;
 
+    @JsonldProperty("http://schema.org/countryOfOrigin")
     @Column(name = "country")
     private String country;
 
     @Column(name = "year")
     private Integer year;
 
+    @JsonldProperty("http://schema.org/duration")
     @Column(name = "duration_min")
     private Integer duration;
 
+    @JsonldProperty("http://schema.org/genre")
     @Column(name = "genre1")
     private String genre1;
 
+    @JsonldProperty("http://schema.org/genre")
     @Column(name = "genre2")
     private String genre2;
 
+    @JsonldProperty("http://schema.org/director")
     @ManyToOne
     @JoinColumn(name = "directorid")
     private Director director;
 
+    @JsonldProperty("http://schema.org/actor")
     @ManyToMany
     @JoinTable(name = "casting",
             joinColumns = @JoinColumn(name = "movieid"),
             inverseJoinColumns = @JoinColumn(name = "actorid"))
     private List<Actor> actors;
 
+    @JsonldProperty("http://schema.org/contentRating")
     @Column(name = "mparating")
     private String mparating;
 

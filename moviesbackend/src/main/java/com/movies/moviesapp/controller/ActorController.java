@@ -1,5 +1,8 @@
 package com.movies.moviesapp.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.movies.moviesapp.controller.response.WrappedActorListResponse;
 import com.movies.moviesapp.controller.response.WrappedActorResponse;
 import com.movies.moviesapp.exception.ApiRequestException;
@@ -7,18 +10,11 @@ import com.movies.moviesapp.entity.Actor;
 import com.movies.moviesapp.repository.ActorRepository;
 import com.movies.moviesapp.controller.response.ActorResponse;
 import com.movies.moviesapp.util.mapper.CreateMapper;
-import org.springframework.boot.web.error.ErrorAttributeOptions;
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.context.annotation.Bean;
+import ioinformarics.oss.jackson.module.jsonld.JsonldModule;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
-import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -29,9 +25,12 @@ public class ActorController {
 
     private final CreateMapper<Actor, WrappedActorResponse> actorWrappedActorResponseCreateMapper;
 
-    public ActorController(ActorRepository actorRepository, CreateMapper<Actor, ActorResponse> actorActorResponseCreateMapper, CreateMapper<Actor, WrappedActorResponse> actorWrappedActorResponseCreateMapper, CreateMapper<List<Actor>, WrappedActorListResponse> actorListWrappedActorResponseCreateMapper) {
+    private final CreateMapper<Actor, ActorResponse> actorActorResponseCreateMapper;
+
+    public ActorController(ActorRepository actorRepository, CreateMapper<Actor, ActorResponse> actorActorResponseCreateMapper, CreateMapper<Actor, WrappedActorResponse> actorWrappedActorResponseCreateMapper, CreateMapper<List<Actor>, WrappedActorListResponse> actorListWrappedActorResponseCreateMapper, CreateMapper<Actor, ActorResponse> actorActorResponseCreateMapper1) {
         this.actorRepository = actorRepository;
         this.actorWrappedActorResponseCreateMapper = actorWrappedActorResponseCreateMapper;
+        this.actorActorResponseCreateMapper = actorActorResponseCreateMapper1;
     }
 
     /**
@@ -54,13 +53,47 @@ public class ActorController {
      */
     @GetMapping ("/id/{id}") //localhost:9090/actors
     @ResponseStatus(HttpStatus.OK)
-    public WrappedActorResponse findActorsById(@PathVariable Long id) {
+    public WrappedActorResponse findActorsById(@PathVariable Long id) throws JsonProcessingException {
 
         final Optional<Actor> actor = actorRepository.findById(id);
 
         if (actor.isPresent()) {
 
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JsonldModule());
+
+            String personJsonLd = objectMapper.writeValueAsString(actor.get());
+            JsonNode node = objectMapper.readTree(personJsonLd);
+            System.out.println(personJsonLd);
+
             return actorWrappedActorResponseCreateMapper.map(actor.get());
+
+        } else {
+
+            throw new ApiRequestException("ACTOR_ID");
+        }
+    }
+
+    /**
+     * Returns an actor by ID in JSON-LD format.
+     * @param id Request describing the actor's id
+     * @return Actor with the specified ID
+     */
+    @GetMapping ("/jsonld/id/{id}") //localhost:9090/actors
+    @ResponseStatus(HttpStatus.OK)
+    public JsonNode findActorsByIdJsonLd(@PathVariable Long id) throws JsonProcessingException {
+
+        final Optional<Actor> actor = actorRepository.findById(id);
+
+        if (actor.isPresent()) {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JsonldModule());
+
+            String personJsonLd = objectMapper.writeValueAsString(actor.get());
+            JsonNode node = objectMapper.readTree(personJsonLd);
+
+            return node;
 
         } else {
 

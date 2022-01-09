@@ -1,0 +1,6 @@
+{
+  "domain": "dev-llt4tkvl.us.auth0.com",
+  "clientId": "PUhn5WNxwmimPJgDvWy62s1kvpXDPjC2",
+  "audience": "https://dev-llt4tkvl.us.auth0.com/api/v2/",
+  "scope": "read:current_user"
+}
